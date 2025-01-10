@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DWMSService } from 'src/app/demo/service/dwms.service';
 import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
 
 
 interface MenuData {
@@ -20,7 +21,7 @@ interface MenuData {
 @Component({
   selector: 'app-dwms',
   standalone: true,
-  imports: [TableModule],
+  imports: [TableModule,CommonModule],
   templateUrl: './dwms.component.html',
   styleUrl: './dwms.component.scss'
 })
@@ -35,6 +36,7 @@ export class DwmsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.isError = false;
     this.dwmsService.getMenu({
       tenant_id: 20,
       system_id: 20

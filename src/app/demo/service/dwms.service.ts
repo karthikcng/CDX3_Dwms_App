@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class DWMSService {
   
-  private apiUrl = `http://192.168.190.189:8081/api/LAB_DWMS/GetMenu`;
+  private apiUrl = `http://cdx3-gateway.eastus.azurecontainer.io/api/get_dwms_menu`;
 
   constructor(
     private cookieService: CookieService, 
@@ -22,7 +22,7 @@ export class DWMSService {
   getMenu(customPayload?: any): Observable<any> {
     const payload = customPayload || this.defaultPayload;
     return new Observable(observer => {
-      const token = this.cookieService.get('id_token');
+      const token = this.cookieService.get('access_token');
 
       axios.post(`${this.apiUrl}`, payload, {
         headers: {
