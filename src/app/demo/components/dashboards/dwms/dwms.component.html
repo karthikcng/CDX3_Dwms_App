@@ -1,0 +1,29 @@
+<div class="border-2 surface-border border-round surface-section flex-auto">
+    <div class="p-3 flex flex-column h-full">
+        <div class="surface-section flex-auto">
+            <p-table [value]="menuData"
+                [tableStyle]="{ 'min-width': '100%', 'height': 'calc(100vh - 500px)' }"
+                [paginator]="true" [rows]="9" styleClass="no-scroll-table"
+                [paginatorPosition]="'bottom'" 
+                [currentPageReportTemplate]="'Showing {first} to {last} of {totalRecords} entries'">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Menu Item</th>
+                        <th>Sub Menu Item</th>
+                        <th>Display Order</th>
+                        <th>System Code</th>
+                        <th>Tenant Code</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-menu>
+                    <tr>
+                        <td>{{menu.l1_menu_item_name1}}</td>
+                        <td>{{menu.l2_menu_item_name1}}</td>
+                        <td>{{menu.l1_menu_item_display_order}}</td>
+                        <td>{{menu.system_code}}</td>
+                        <td>{{menu.tenant_code}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>

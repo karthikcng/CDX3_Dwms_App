@@ -21,15 +21,10 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/']
                     },
                     {
-                        label: 'Analytics Dashboard',
+                        label: 'DWMS Main',
                         icon: 'pi pi-fw pi-chart-pie',
-                        routerLink: ['/dashboard-analytics']
-                    },
-                    {
-                        label: 'SaaS Dashboard',
-                        icon: 'pi pi-fw pi-bolt',
-                        routerLink: ['/dashboard-saas']
-                    },
+                        routerLink: ['/dwms']
+                    }
                 ]
             },
             {
