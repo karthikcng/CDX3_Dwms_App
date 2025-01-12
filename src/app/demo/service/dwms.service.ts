@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios'; 
+import axios from 'axios';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -8,12 +8,12 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class DWMSService {
-  
+
   private apiUrl = `http://cdx3-gateway.eastus.azurecontainer.io/api/get_dwms_menu`;
 
   constructor(
-    private cookieService: CookieService, 
-  ) {}
+    private cookieService: CookieService,
+  ) { }
   private defaultPayload = {
     tenant_id: 20,
     system_id: 20
@@ -26,15 +26,17 @@ export class DWMSService {
 
       axios.post(`${this.apiUrl}`, payload, {
         headers: {
-            Authorization: `Bearer ${token}`, 
-          },
+          'Content-Type': 'application/json; charset= utf-8',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       })
         .then(response => {
-          observer.next(response.data);  
-          observer.complete(); 
+          observer.next(response.data);
+          observer.complete();
         })
         .catch(error => {
-          observer.error(error); 
+          observer.error(error);
         });
     });
   }
