@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/app/environments/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class DWMSService {
 
-  private apiUrl = `https://cdx3-gateway.eastus.azurecontainer.io/api/get_dwms_menu`;
+  private apiUrl = environment.API_GATEWAY_URL;
 
   constructor(
     private cookieService: CookieService,
@@ -24,7 +25,7 @@ export class DWMSService {
     return new Observable(observer => {
       const token = this.cookieService.get('access_token');
 
-      axios.post(`${this.apiUrl}`, payload, {
+      axios.post(`${this.apiUrl}/api/get_dwms_menu`, payload, {
         headers: {
           'Content-Type': 'application/json; charset= utf-8',
           Accept: 'application/json',
