@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class DWMSService {
 
-  private apiUrl = `http://cdx3-gateway.eastus.azurecontainer.io/api/get_dwms_menu`;
+  private apiUrl = `https://cdx3-gateway.eastus.azurecontainer.io/api/get_dwms_menu`;
 
   constructor(
     private cookieService: CookieService,
