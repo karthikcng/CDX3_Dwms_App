@@ -23,7 +23,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'DWMS Dashboard',
                         icon: 'pi pi-fw pi-chart-pie',
-                        routerLink: ['/dwms']
+                        routerLink: ['/menu']
                     }
                 ]
             },
