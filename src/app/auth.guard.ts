@@ -15,14 +15,25 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
     const isAuthenticated = this.isUserAuthenticated(); 
+    const isAuthorized = this.isUserAuthorized();
+
+    if(!isAuthorized) {
+      window.location.href = '/context-selection';
+      return false;
+    }
     if (!isAuthenticated) {
-      window.location.href = '/landing-page'; 
+      window.location.href = '/landing-page';
       return false;
     }
     return true;
   }
 
   private isUserAuthenticated(): boolean {
+    const token = this.cookieService.get('access_token');
+    return !!token; 
+  }
+
+  private isUserAuthorized(): boolean {
     const token = this.cookieService.get('access_token');
     const decodedToken = decodeToken(token);
 
