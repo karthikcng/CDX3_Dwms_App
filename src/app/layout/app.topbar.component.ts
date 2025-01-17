@@ -5,17 +5,20 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-topbar',
-    templateUrl: './app.topbar.component.html'
+    templateUrl: './app.topbar.component.html',
 })
 export class AppTopbarComponent {
-    
     @ViewChild('menuButton') menuButton!: ElementRef;
 
     @ViewChild('mobileMenuButton') mobileMenuButton!: ElementRef;
 
     @ViewChild('searchInput') searchInput!: ElementRef;
-    
-    constructor(public layoutService: LayoutService, public el: ElementRef, private cookieService: CookieService) {}
+
+    constructor(
+        public layoutService: LayoutService,
+        public el: ElementRef,
+        private cookieService: CookieService
+    ) {}
 
     activeItem!: number;
 
@@ -25,17 +28,37 @@ export class AppTopbarComponent {
             items: [
                 [
                     {
-                        label: 'UI KIT 1',
+                        label: 'dwms main',
                         items: [
-                            { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'] },
-                            { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input'] },
-                            { label: 'Float Label', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/floatlabel'] },
-                            { label: 'Button', icon: 'pi pi-fw pi-mobile', routerLink: ['/uikit/button'] },
-                            { label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file'] }
-                        ]
-                    }
-                ],                
-            ]
+                            {
+                                label: 'Form Layout',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/formlayout'],
+                            },
+                            {
+                                label: 'Input',
+                                icon: 'pi pi-fw pi-check-square',
+                                routerLink: ['/uikit/input'],
+                            },
+                            {
+                                label: 'Float Label',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/uikit/floatlabel'],
+                            },
+                            {
+                                label: 'Button',
+                                icon: 'pi pi-fw pi-mobile',
+                                routerLink: ['/uikit/button'],
+                            },
+                            {
+                                label: 'File',
+                                icon: 'pi pi-fw pi-file',
+                                routerLink: ['/uikit/file'],
+                            },
+                        ],
+                    },
+                ],
+            ],
         },
         {
             label: 'UTILITIES',
@@ -44,14 +67,22 @@ export class AppTopbarComponent {
                     {
                         label: 'UTILITIES 1',
                         items: [
-                            { label: 'Icons', icon: 'pi pi-fw pi-prime', routerLink: ['utilities/icons'] },
-                            { label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: 'https://www.primefaces.org/primeflex/', target: '_blank' }
-                        ]
-                    }
+                            {
+                                label: 'Icons',
+                                icon: 'pi pi-fw pi-prime',
+                                routerLink: ['utilities/icons'],
+                            },
+                            {
+                                label: 'PrimeFlex',
+                                icon: 'pi pi-fw pi-desktop',
+                                url: 'https://www.primefaces.org/primeflex/',
+                                target: '_blank',
+                            },
+                        ],
+                    },
                 ],
-
-            ]
-        }
+            ],
+        },
     ];
 
     get mobileTopbarActive(): boolean {
@@ -68,27 +99,29 @@ export class AppTopbarComponent {
     }
 
     handleSignOut(): void {
-        this.clearLoginInfo();        
+        this.clearLoginInfo();
         window.location.href = '/';
-      }
-    
-      clearLoginInfo(): void {
+    }
+
+    clearLoginInfo(): void {
         const allCookies = this.cookieService.getAll();
-    
-        Object.keys(allCookies).forEach(cookieName => {
-            this.cookieService.delete(cookieName, '/'); 
+
+        Object.keys(allCookies).forEach((cookieName) => {
+            this.cookieService.delete(cookieName, '/');
         });
-        document.cookie = 'KEYCLOAK_IDENTITY=; Path=/realms/compliance365/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-        document.cookie = 'KEYCLOAK_SESSION=; Path=/realms/compliance365/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-      }
+        document.cookie =
+            'KEYCLOAK_IDENTITY=; Path=/realms/compliance365/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+        document.cookie =
+            'KEYCLOAK_SESSION=; Path=/realms/compliance365/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+    }
 
     onMobileTopbarMenuButtonClick() {
         this.layoutService.onTopbarMenuToggle();
     }
 
-    focusSearchInput(){
-       setTimeout(() => {
-         this.searchInput.nativeElement.focus()
-       }, 0);
+    focusSearchInput() {
+        setTimeout(() => {
+            this.searchInput.nativeElement.focus();
+        }, 0);
     }
 }
